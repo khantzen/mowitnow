@@ -4,8 +4,7 @@ import com.khantzen.mowersimulator.model.Mower;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class MowerMovementTest {
-
+public class MowerRotationMovementTest {
     @Test
     public void mowerRightRotationFromNorthToEast() {
         testRightRotation('N', 'E');
@@ -67,6 +66,4 @@ public class MowerMovementTest {
 
         Assertions.assertThat(mower.getOrientation()).isEqualTo(expectedOrientation);
     }
-
-
 }
