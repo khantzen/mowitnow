@@ -1,6 +1,5 @@
 package com.khantzen.mowersimulator.operation;
 
-import com.khantzen.mowersimulator.model.Mower;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -54,16 +53,11 @@ public class MowerRotationMovementTest {
     }
 
     private void testValidRotation(char initialOrientation, char expectedOrientation, char rotation) {
-        Mower mower = new Mower.Builder()
-                .orientation(initialOrientation)
-                .build();
-
         MowerMovement mowerMovement = new MowerMovement.Builder()
-                .mower(mower)
                 .build();
 
-        mowerMovement.rotate(rotation);
+        char orientationAfterRotation = mowerMovement.getOrientationAfterRotation(initialOrientation, rotation);
 
-        Assertions.assertThat(mower.getOrientation()).isEqualTo(expectedOrientation);
+        Assertions.assertThat(orientationAfterRotation).isEqualTo(expectedOrientation);
     }
 }

@@ -12,7 +12,7 @@ public class SimulatorEntry {
     }
 
     public Coordinates getYardRightTopCorner() {
-        return yardRightTopCorner;
+        return this.yardRightTopCorner;
     }
 
     public int getYardXRightTopCorner() {
@@ -27,7 +27,7 @@ public class SimulatorEntry {
         return this.mowerList.get(index);
     }
 
-    public int mowerCount() {
+    public int getMowerCount() {
         return this.mowerList.size();
     }
 

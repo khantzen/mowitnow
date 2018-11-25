@@ -10,19 +10,10 @@ public class Coordinates {
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
-    }
-
-    // Coordinates can actually be edited only from model package to respect Demeter Law
-    void setX(int x) {
-        this.x = x;
-    }
-
-    void setY(int y) {
-        this.y = y;
+        return this.y;
     }
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class EntryFile {
 
     public SimulatorEntry parse(String path) throws IOException, ParseException {
-        List<String> userEntries = getEntriesFromPath(path);
+        List<String> userEntries = this.getBrutEntriesFromPath(path);
 
         String yardTopCornerInfoLine = userEntries.get(0);
         Coordinates yardRightTopCorner = getYardRightTopCornerCoordinates(yardTopCornerInfoLine);
@@ -31,8 +31,8 @@ public class EntryFile {
                 .build();
     }
 
-    private List<String> getEntriesFromPath(String path) throws IOException, ParseException {
-        List<String> fileContent = getFileContent(path);
+    private List<String> getBrutEntriesFromPath(String path) throws IOException, ParseException {
+        List<String> fileContent = this.getFileContent(path);
 
         if (fileContent.size() % 2 == 0) {
             throw new ParseException(

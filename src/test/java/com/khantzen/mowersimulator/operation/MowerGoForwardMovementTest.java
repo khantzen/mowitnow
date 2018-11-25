@@ -89,15 +89,14 @@ public class MowerGoForwardMovementTest {
     private void simpleTranslationTest(Mower mower, int expectedX, int expectedY) {
         MowerMovement mowerMovement =
                 new MowerMovement.Builder()
-                        .mower(mower)
                         .yardXTopCorner(15)
                         .yardYTopCorner(18)
                         .build();
 
-        mowerMovement.moveForward();
+        Coordinates coordAfterMoveForward = mowerMovement.getCoordinatesAfterMoveForward(mower);
 
-        Assertions.assertThat(mower.getX()).isEqualTo(expectedX);
-        Assertions.assertThat(mower.getY()).isEqualTo(expectedY);
+        Assertions.assertThat(coordAfterMoveForward.getX()).isEqualTo(expectedX);
+        Assertions.assertThat(coordAfterMoveForward.getY()).isEqualTo(expectedY);
     }
 
 

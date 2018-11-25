@@ -27,7 +27,7 @@ public class EntryFileTest {
         this.checkYardRightTopCoordinates(yardRightTopCoordinates, 5, 15);
 
         // Check mower
-        Assertions.assertThat(simulatorEntry.mowerCount()).isEqualTo(1);
+        Assertions.assertThat(simulatorEntry.getMowerCount()).isEqualTo(1);
 
         Mower mower = simulatorEntry.getMowerAtIndex(0);
 
@@ -49,7 +49,7 @@ public class EntryFileTest {
         this.checkYardRightTopCoordinates(yardRightTopCoordinates, 7, 5);
 
         // Check mower
-        Assertions.assertThat(simulatorEntry.mowerCount()).isEqualTo(3);
+        Assertions.assertThat(simulatorEntry.getMowerCount()).isEqualTo(3);
 
         Mower mower = simulatorEntry.getMowerAtIndex(2);
 

@@ -14,7 +14,7 @@ public class Mower {
     }
 
     public char getOrientation() {
-        return orientation;
+        return this.orientation;
     }
 
     public void setOrientation(char orientation) {
@@ -22,23 +22,19 @@ public class Mower {
     }
 
     public String getInstructionSequence() {
-        return instructionSequence;
+        return this.instructionSequence;
     }
 
-    public int getY() {
-        return this.coordinates.getY();
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public int getX() {
         return this.coordinates.getX();
     }
 
-    public void setY(int nextY) {
-        this.coordinates.setY(nextY);
-    }
-
-    public void setX(int nextX) {
-        this.coordinates.setX(nextX);
+    public int getY() {
+        return this.coordinates.getY();
     }
 
     @Override

@@ -1,29 +1,27 @@
 package com.khantzen.mowersimulator.operation;
 
+import com.khantzen.mowersimulator.model.Coordinates;
 import com.khantzen.mowersimulator.model.Mower;
 
 class MowerMovement {
-    private Mower mower;
     private final int yardXRightTopCorner;
     private final int yardYRightTopCorner;
 
     private MowerMovement(Builder builder) {
-        this.mower = builder.mower;
         this.yardXRightTopCorner = builder.yardXTopCorner;
         this.yardYRightTopCorner = builder.yardYTopCorner;
     }
 
-    void moveForward() {
-        int nextX = getXAfterMoveForward();
-        int nextY = getYAfterMoveForward();
+    Coordinates getCoordinatesAfterMoveForward(Mower mower) {
+        int nextX = this.getXAfterMoveForward(mower);
+        int nextY = this.getYAfterMoveForward(mower);
 
-        this.mower.setX(nextX);
-        this.mower.setY(nextY);
+        return new Coordinates(nextX, nextY);
     }
 
-    private int getYAfterMoveForward() {
-        char mowerOrientation = this.mower.getOrientation();
-        int y = this.mower.getY();
+    private int getYAfterMoveForward(Mower mower) {
+        char mowerOrientation = mower.getOrientation();
+        int y = mower.getY();
 
         if (mowerOrientation == 'E' || mowerOrientation == 'W') {
             return y;
@@ -31,16 +29,16 @@ class MowerMovement {
 
         int nextY = y + (mowerOrientation == 'N' ? +1 : -1);
 
-        if (nextY < 0 || nextY > yardYRightTopCorner) {
+        if (nextY < 0 || nextY > this.yardYRightTopCorner) {
             nextY = y;
         }
 
         return nextY;
     }
 
-    private int getXAfterMoveForward() {
-        char mowerOrientation = this.mower.getOrientation();
-        int x = this.mower.getX();
+    private int getXAfterMoveForward(Mower mower) {
+        char mowerOrientation = mower.getOrientation();
+        int x = mower.getX();
 
         if (mowerOrientation == 'N' || mowerOrientation == 'S') {
             return x;
@@ -48,20 +46,14 @@ class MowerMovement {
 
         int nextX = x + (mowerOrientation == 'E' ? +1 : -1);
 
-        if (nextX < 0 || nextX > yardXRightTopCorner) {
+        if (nextX < 0 || nextX > this.yardXRightTopCorner) {
             nextX = x;
         }
 
         return nextX;
     }
 
-    void rotate(char direction) {
-        char mowerOrientation = this.mower.getOrientation();
-        char nextOrientation = getNextOrientation(direction, mowerOrientation);
-        this.mower.setOrientation(nextOrientation);
-    }
-
-    private char getNextOrientation(char direction, char mowerOrientation) {
+    char getOrientationAfterRotation(char mowerOrientation, char direction) {
         String sortedOrientation = direction == 'D' ? "NESW" : "NWSE";
 
         int mowerOrientationIndex = sortedOrientation.indexOf(mowerOrientation);
@@ -73,14 +65,8 @@ class MowerMovement {
     }
 
     static class Builder {
-        private Mower mower;
         private int yardXTopCorner;
         private int yardYTopCorner;
-
-        Builder mower(Mower mower) {
-            this.mower = mower;
-            return this;
-        }
 
         Builder yardXTopCorner(int yardXTopCorner) {
             this.yardXTopCorner = yardXTopCorner;
