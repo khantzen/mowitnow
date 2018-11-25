@@ -10,8 +10,12 @@ public class MowerSimulatorMain {
 
     public static void main(String[] args) throws Exception {
         SimulatorEntry simulatorEntry = getSimulatorEntry(args);
-        List<String> simulationResult = runMowerSimulation(simulatorEntry);
-        printSimulationResult(simulationResult);
+        try {
+            List<String> simulationResult = runMowerSimulation(simulatorEntry);
+            printSimulationResult(simulationResult);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private static void printSimulationResult(List<String> simulationResult) {
