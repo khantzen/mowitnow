@@ -7,24 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    private final SimulatorEntry entry;
+    private final SimulatorEntry simulatorEntry;
 
     public Simulation(SimulatorEntry simulatorEntry) {
-        this.entry = simulatorEntry;
+        this.simulatorEntry = simulatorEntry;
     }
 
     public List<String> run() {
 
         List<String> mowersFinalPosition = new ArrayList<>();
 
-        for (int i = 0; i < entry.mowerCount(); i++) {
-            Mower mower = entry.getMowerAtIndex(i);
+        for (int i = 0; i < simulatorEntry.mowerCount(); i++) {
+            Mower mower = simulatorEntry.getMowerAtIndex(i);
 
-            MowerMovement mowerMovement = new MowerMovement.Builder()
-                    .mower(mower)
-                    .yardXTopCorner(entry.getYardXRightTopCorner())
-                    .yardYTopCorner(entry.getYardYRightTopCorner())
-                    .build();
+            MowerMovement mowerMovement = buildMowerMovement(mower);
 
             String instructionSequence = mower.getInstructionSequence();
 
@@ -40,5 +36,13 @@ public class Simulation {
         }
 
         return mowersFinalPosition;
+    }
+
+    private MowerMovement buildMowerMovement(Mower mower) {
+        return new MowerMovement.Builder()
+                        .mower(mower)
+                        .yardXTopCorner(simulatorEntry.getYardXRightTopCorner())
+                        .yardYTopCorner(simulatorEntry.getYardYRightTopCorner())
+                        .build();
     }
 }

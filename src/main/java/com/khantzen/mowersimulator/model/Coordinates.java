@@ -13,15 +13,16 @@ public class Coordinates {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
+    // Coordinates can actually be edited only from model package to respect Demeter Law
+    void setX(int x) {
+        this.x = x;
+    }
+
+    void setY(int y) {
         this.y = y;
     }
 }

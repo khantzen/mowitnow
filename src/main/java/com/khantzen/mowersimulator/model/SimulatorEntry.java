@@ -23,12 +23,12 @@ public class SimulatorEntry {
         return this.yardRightTopCorner.getY();
     }
 
-    public int mowerCount() {
-        return this.mowerList.size();
-    }
-
     public Mower getMowerAtIndex(int index) {
         return this.mowerList.get(index);
+    }
+
+    public int mowerCount() {
+        return this.mowerList.size();
     }
 
     public static class Builder {

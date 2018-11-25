@@ -4,12 +4,13 @@ package com.khantzen.mowersimulator.model;
 public class Mower {
     private char orientation;
     private Coordinates coordinates;
+
     private final String instructionSequence;
 
     private Mower(Builder builder) {
         this.orientation = builder.orientation;
-        this.instructionSequence = builder.instructionSequence;
         this.coordinates = builder.coordinates;
+        this.instructionSequence = builder.instructionSequence;
     }
 
     public char getOrientation() {
@@ -24,20 +25,20 @@ public class Mower {
         return instructionSequence;
     }
 
-    public void setX(int nextX) {
-        this.coordinates.setX(nextX);
-    }
-
-    public void setY(int nextY) {
-        this.coordinates.setY(nextY);
-    }
-
     public int getY() {
         return this.coordinates.getY();
     }
 
     public int getX() {
         return this.coordinates.getX();
+    }
+
+    public void setY(int nextY) {
+        this.coordinates.setY(nextY);
+    }
+
+    public void setX(int nextX) {
+        this.coordinates.setX(nextX);
     }
 
     @Override

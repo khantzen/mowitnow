@@ -2,7 +2,7 @@ package com.khantzen.mowersimulator.operation;
 
 import com.khantzen.mowersimulator.model.Mower;
 
-public class MowerMovement {
+class MowerMovement {
     private Mower mower;
     private final int yardXRightTopCorner;
     private final int yardYRightTopCorner;
@@ -72,27 +72,27 @@ public class MowerMovement {
         return sortedOrientation.charAt(nextOrientationIndex);
     }
 
-    public static class Builder {
+    static class Builder {
         private Mower mower;
         private int yardXTopCorner;
         private int yardYTopCorner;
 
-        public Builder mower(Mower mower) {
+        Builder mower(Mower mower) {
             this.mower = mower;
             return this;
         }
 
-        public Builder yardXTopCorner(int yardXTopCorner) {
+        Builder yardXTopCorner(int yardXTopCorner) {
             this.yardXTopCorner = yardXTopCorner;
             return this;
         }
 
-        public Builder yardYTopCorner(int yardYTopCorner) {
+        Builder yardYTopCorner(int yardYTopCorner) {
             this.yardYTopCorner = yardYTopCorner;
             return this;
         }
 
-        public MowerMovement build() {
+        MowerMovement build() {
             return new MowerMovement(this);
         }
     }
