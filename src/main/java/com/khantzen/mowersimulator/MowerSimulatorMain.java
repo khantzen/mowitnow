@@ -8,9 +8,9 @@ import java.util.List;
 
 public class MowerSimulatorMain {
 
-    public static void main(String[] args) throws Exception {
-        SimulatorEntry simulatorEntry = getSimulatorEntry(args);
+    public static void main(String[] args) {
         try {
+            SimulatorEntry simulatorEntry = getSimulatorEntry(args);
             List<String> simulationResult = runMowerSimulation(simulatorEntry);
             printSimulationResult(simulationResult);
         } catch (Exception ex) {
