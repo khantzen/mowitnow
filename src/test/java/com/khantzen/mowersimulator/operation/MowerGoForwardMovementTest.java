@@ -1,5 +1,6 @@
 package com.khantzen.mowersimulator.operation;
 
+import com.khantzen.mowersimulator.model.Coordinates;
 import com.khantzen.mowersimulator.model.Mower;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class MowerGoForwardMovementTest {
     public void testXUnder0Translation() {
         Mower mower = new Mower.Builder()
                 .orientation('W')
-                .x(0).y(1)
+                .coordinates(new Coordinates(0, 1))
                 .build();
 
         simpleTranslationTest(mower, 0, 1);
@@ -50,7 +51,7 @@ public class MowerGoForwardMovementTest {
     public void testYUnder0Translation() {
         Mower mower = new Mower.Builder()
                 .orientation('S')
-                .x(7).y(0)
+                .coordinates(new Coordinates(7, 0))
                 .build();
 
         simpleTranslationTest(mower, 7, 0);
@@ -60,7 +61,7 @@ public class MowerGoForwardMovementTest {
     public void testXOverYardTranslation() {
         Mower mower = new Mower.Builder()
                 .orientation('E')
-                .x(15).y(3)
+                .coordinates(new Coordinates(15, 3))
                 .build();
 
         simpleTranslationTest(mower, 15, 3);
@@ -70,7 +71,7 @@ public class MowerGoForwardMovementTest {
     public void testYOverYardTranslation() {
         Mower mower = new Mower.Builder()
                 .orientation('N')
-                .x(5).y(18)
+                .coordinates(new Coordinates(5, 18))
                 .build();
 
         simpleTranslationTest(mower, 5, 18);
@@ -79,7 +80,7 @@ public class MowerGoForwardMovementTest {
     private void simpleTranslationTest(char orientation, int expectedX, int expectedY) {
         Mower mower = new Mower.Builder()
                 .orientation(orientation)
-                .x(1).y(1)
+                .coordinates(new Coordinates(1, 1))
                 .build();
 
         simpleTranslationTest(mower, expectedX, expectedY);

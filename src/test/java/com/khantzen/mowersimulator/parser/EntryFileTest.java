@@ -2,7 +2,7 @@ package com.khantzen.mowersimulator.parser;
 
 import com.khantzen.mowersimulator.model.Coordinates;
 import com.khantzen.mowersimulator.model.Mower;
-import com.khantzen.mowersimulator.model.MowerEntry;
+import com.khantzen.mowersimulator.model.SimulatorEntry;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -18,18 +18,18 @@ public class EntryFileTest {
     public void validEntryFileWithOneMower() throws IOException, ParseException {
         EntryFile entryFile = new EntryFile();
 
-        MowerEntry mowerEntry = entryFile.parse("src/test/resources/validTestCase/oneMowerTestFile");
+        SimulatorEntry simulatorEntry = entryFile.parse("src/test/resources/validTestCase/oneMowerTestFile");
 
-        Assertions.assertThat(mowerEntry).isNotNull();
+        Assertions.assertThat(simulatorEntry).isNotNull();
 
         // Check yards
-        Coordinates yardRightTopCoordinates = mowerEntry.getYardRightTopCorner();
+        Coordinates yardRightTopCoordinates = simulatorEntry.getYardRightTopCorner();
         this.checkYardRightTopCoordinates(yardRightTopCoordinates, 5, 15);
 
         // Check mower
-        Assertions.assertThat(mowerEntry.mowerCount()).isEqualTo(1);
+        Assertions.assertThat(simulatorEntry.mowerCount()).isEqualTo(1);
 
-        Mower mower = mowerEntry.getMowerAtIndex(0);
+        Mower mower = simulatorEntry.getMowerAtIndex(0);
 
         Assertions.assertThat(mower.getX()).isEqualTo(1);
         Assertions.assertThat(mower.getY()).isEqualTo(2);
@@ -42,16 +42,16 @@ public class EntryFileTest {
     @Test
     public void validEntryFileWithManyMowers() throws IOException, ParseException {
         EntryFile entryFile = new EntryFile();
-        MowerEntry mowerEntry = entryFile.parse("src/test/resources/validTestCase/threeMowerTestFile");
+        SimulatorEntry simulatorEntry = entryFile.parse("src/test/resources/validTestCase/threeMowerTestFile");
 
         // Check yards
-        Coordinates yardRightTopCoordinates = mowerEntry.getYardRightTopCorner();
+        Coordinates yardRightTopCoordinates = simulatorEntry.getYardRightTopCorner();
         this.checkYardRightTopCoordinates(yardRightTopCoordinates, 7, 5);
 
         // Check mower
-        Assertions.assertThat(mowerEntry.mowerCount()).isEqualTo(3);
+        Assertions.assertThat(simulatorEntry.mowerCount()).isEqualTo(3);
 
-        Mower mower = mowerEntry.getMowerAtIndex(2);
+        Mower mower = simulatorEntry.getMowerAtIndex(2);
 
         Assertions.assertThat(mower.getX()).isEqualTo(4);
         Assertions.assertThat(mower.getY()).isEqualTo(2);

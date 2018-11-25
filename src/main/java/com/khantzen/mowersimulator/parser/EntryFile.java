@@ -2,7 +2,7 @@ package com.khantzen.mowersimulator.parser;
 
 import com.khantzen.mowersimulator.model.Coordinates;
 import com.khantzen.mowersimulator.model.Mower;
-import com.khantzen.mowersimulator.model.MowerEntry;
+import com.khantzen.mowersimulator.model.SimulatorEntry;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class EntryFile {
 
-    public MowerEntry parse(String path) throws IOException, ParseException {
+    public SimulatorEntry parse(String path) throws IOException, ParseException {
         List<String> userEntries = getEntriesFromPath(path);
 
         String yardTopCornerInfoLine = userEntries.get(0);
@@ -25,7 +25,7 @@ public class EntryFile {
 
         List<Mower> mowerList = getMowerList(userEntries);
 
-        return new MowerEntry.Builder()
+        return new SimulatorEntry.Builder()
                 .yardRightTopCorner(yardRightTopCorner)
                 .mowerList(mowerList)
                 .build();

@@ -2,17 +2,25 @@ package com.khantzen.mowersimulator.model;
 
 import java.util.List;
 
-public class MowerEntry {
+public class SimulatorEntry {
     private final Coordinates yardRightTopCorner;
     private List<Mower> mowerList;
 
-    public MowerEntry(Builder builder) {
+    private SimulatorEntry(Builder builder) {
         this.yardRightTopCorner = builder.yardRightTopCorner;
         this.mowerList = builder.mowerList;
     }
 
     public Coordinates getYardRightTopCorner() {
         return yardRightTopCorner;
+    }
+
+    public int getYardXRightTopCorner() {
+        return this.yardRightTopCorner.getX();
+    }
+
+    public int getYardYRightTopCorner() {
+        return this.yardRightTopCorner.getY();
     }
 
     public int mowerCount() {
@@ -24,7 +32,7 @@ public class MowerEntry {
     }
 
     public static class Builder {
-        public Coordinates yardRightTopCorner;
+        Coordinates yardRightTopCorner;
         private List<Mower> mowerList;
 
         public Builder yardRightTopCorner(Coordinates yardRightTopCorner) {
@@ -37,8 +45,8 @@ public class MowerEntry {
             return this;
         }
 
-        public MowerEntry build() {
-            return new MowerEntry(this);
+        public SimulatorEntry build() {
+            return new SimulatorEntry(this);
         }
     }
 }

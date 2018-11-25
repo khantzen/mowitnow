@@ -40,6 +40,11 @@ public class Mower {
         return this.coordinates.getX();
     }
 
+    @Override
+    public String toString() {
+        return this.getX() + " " + this.getY() + " " + this.orientation;
+    }
+
     public static class Builder {
         private char orientation;
         private Coordinates coordinates;
