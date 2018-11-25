@@ -3,13 +3,13 @@ package com.khantzen.mowersimulator.model;
 
 public class Mower {
     private char orientation;
-    private int x;
-    private int y;
+    private Coordinates coordinates;
+    private final String instructionSequence;
 
     private Mower(Builder builder) {
         this.orientation = builder.orientation;
-        this.x = builder.x;
-        this.y = builder.y;
+        this.instructionSequence = builder.instructionSequence;
+        this.coordinates = builder.coordinates;
     }
 
     public char getOrientation() {
@@ -20,39 +20,43 @@ public class Mower {
         this.orientation = orientation;
     }
 
-    public int getX() {
-        return x;
+    public String getInstructionSequence() {
+        return instructionSequence;
+    }
+
+    public void setX(int nextX) {
+        this.coordinates.setX(nextX);
+    }
+
+    public void setY(int nextY) {
+        this.coordinates.setY(nextY);
     }
 
     public int getY() {
-        return y;
+        return this.coordinates.getY();
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
+    public int getX() {
+        return this.coordinates.getX();
     }
 
     public static class Builder {
         private char orientation;
-        private int y;
-        private int x;
+        private Coordinates coordinates;
+        private String instructionSequence;
 
         public Builder orientation(char orientation) {
             this.orientation = orientation;
             return this;
         }
 
-        public Builder x(int x) {
-            this.x = x;
+        public Builder coordinates(Coordinates coordinates) {
+            this.coordinates = coordinates;
             return this;
         }
 
-        public Builder y(int y) {
-            this.y = y;
+        public Builder instructionSequence(String instructionSequence) {
+            this.instructionSequence = instructionSequence;
             return this;
         }
 

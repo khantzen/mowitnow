@@ -4,16 +4,16 @@ import com.khantzen.mowersimulator.model.Mower;
 
 public class MowerMovement {
     private Mower mower;
-    private final int yardXTopCorner;
-    private final int yardYTopCorner;
+    private final int yardXRightTopCorner;
+    private final int yardYRightTopCorner;
 
     private MowerMovement(Builder builder) {
         this.mower = builder.mower;
-        this.yardXTopCorner = builder.yardXTopCorner;
-        this.yardYTopCorner = builder.yardYTopCorner;
+        this.yardXRightTopCorner = builder.yardXTopCorner;
+        this.yardYRightTopCorner = builder.yardYTopCorner;
     }
 
-    public void moveForward() {
+    void moveForward() {
         int nextX = getXAfterMoveForward();
         int nextY = getYAfterMoveForward();
 
@@ -31,7 +31,7 @@ public class MowerMovement {
 
         int nextY = y + (mowerOrientation == 'N' ? +1 : -1);
 
-        if (nextY < 0 || nextY > yardYTopCorner) {
+        if (nextY < 0 || nextY > yardYRightTopCorner) {
             nextY = y;
         }
 
@@ -48,15 +48,14 @@ public class MowerMovement {
 
         int nextX = x + (mowerOrientation == 'E' ? +1 : -1);
 
-        if (nextX < 0 || nextX > yardXTopCorner) {
+        if (nextX < 0 || nextX > yardXRightTopCorner) {
             nextX = x;
         }
 
         return nextX;
     }
 
-
-    public void rotate(char direction) {
+    void rotate(char direction) {
         char mowerOrientation = this.mower.getOrientation();
         char nextOrientation = getNextOrientation(direction, mowerOrientation);
         this.mower.setOrientation(nextOrientation);
