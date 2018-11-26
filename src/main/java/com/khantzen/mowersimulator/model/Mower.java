@@ -30,7 +30,7 @@ public class Mower {
     }
 
     public Coordinates getCoordinates() {
-        return coordinates;
+        return this.coordinates;
     }
 
     public int getX() {
