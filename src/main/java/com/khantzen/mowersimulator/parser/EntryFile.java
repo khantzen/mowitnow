@@ -48,6 +48,22 @@ public class EntryFile {
         return bufferedReader.lines().collect(Collectors.toList());
     }
 
+    private Coordinates getYardRightTopCornerCoordinates(String yardTopCornerInfoLine) throws ParseException {
+        Pattern rightTopCornerMatchingPattern = Pattern.compile("^(?<xCoord>\\d+) (?<yCoord>\\d+)$");
+        Matcher rightTopCornerCoordMatcher = rightTopCornerMatchingPattern.matcher(yardTopCornerInfoLine);
+
+        if (!rightTopCornerCoordMatcher.find()) {
+            throw new ParseException(
+                    "Cannot parse '" + yardTopCornerInfoLine + "'" +
+                            " into valid yard right top corner coordinates.", 0);
+        }
+
+        int yardXRightTopCorner = Integer.parseInt(rightTopCornerCoordMatcher.group("xCoord"));
+        int yardYRightTopCorner = Integer.parseInt(rightTopCornerCoordMatcher.group("yCoord"));
+
+        return new Coordinates(yardXRightTopCorner, yardYRightTopCorner);
+    }
+
     private List<Mower> getMowerList(List<String> fileContent) throws ParseException {
         List<Mower> mowerList = new ArrayList<>();
 
@@ -89,21 +105,5 @@ public class EntryFile {
                 .coordinates(coordinates)
                 .instructionSequence(mowerInstructionSequence)
                 .build();
-    }
-
-    private Coordinates getYardRightTopCornerCoordinates(String yardTopCornerInfoLine) throws ParseException {
-        Pattern rightTopCornerMatchingPattern = Pattern.compile("^(?<xCoord>\\d+) (?<yCoord>\\d+)$");
-        Matcher rightTopCornerCoordMatcher = rightTopCornerMatchingPattern.matcher(yardTopCornerInfoLine);
-
-        if (!rightTopCornerCoordMatcher.find()) {
-            throw new ParseException(
-                    "Cannot parse '" + yardTopCornerInfoLine + "'" +
-                            " into valid yard right top corner coordinates.", 0);
-        }
-
-        int yardXRightTopCorner = Integer.parseInt(rightTopCornerCoordMatcher.group("xCoord"));
-        int yardYRightTopCorner = Integer.parseInt(rightTopCornerCoordMatcher.group("yCoord"));
-
-        return new Coordinates(yardXRightTopCorner, yardYRightTopCorner);
     }
 }
