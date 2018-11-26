@@ -4,57 +4,57 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class RotationMovementTest {
-    @Test
-    public void mowerRightRotationFromNorthToEast() {
-        testRightRotation('N', 'E');
-    }
 
     @Test
-    public void moveRightRotationFromEastToSouth() {
-        testRightRotation('E', 'S');
+    public void mowerRightRotationFromNorthToEastTest() {
+        rightRotationAssertion('N', 'E');
     }
 
     @Test
-    public void moveRightRotationFromSouthToWest() {
-        testRightRotation('S', 'W');
+    public void moveRightRotationFromEastToSouthTest() {
+        rightRotationAssertion('E', 'S');
     }
 
     @Test
-    public void moveRightRotationFromWestToNorth() {
-        testRightRotation('W', 'N');
+    public void moveRightRotationFromSouthToWestTest() {
+        rightRotationAssertion('S', 'W');
     }
 
     @Test
-    public void moveLeftRotationFromNorthToWest() {
-        testLeftRotation('N', 'W');
+    public void moveRightRotationFromWestToNorthTest() {
+        rightRotationAssertion('W', 'N');
+    }
+
+    private void rightRotationAssertion(char initialOrientation, char expectedOrientation) {
+        validRotationAssertion(initialOrientation, expectedOrientation, 'D');
     }
 
     @Test
-    public void moveLeftRotationFromWestToSouth() {
-        testLeftRotation('W', 'S');
+    public void moveLeftRotationFromNorthToWestTest() {
+        leftRotationAssertion('N', 'W');
     }
 
     @Test
-    public void moveLeftRotationFromSouthToEast() {
-        testLeftRotation('S', 'E');
+    public void moveLeftRotationFromWestToSouthTest() {
+        leftRotationAssertion('W', 'S');
     }
 
     @Test
-    public void moveLeftRotationFromEastToNorth() {
-        testLeftRotation('E', 'N');
+    public void moveLeftRotationFromSouthToEastTest() {
+        leftRotationAssertion('S', 'E');
     }
 
-    private void testLeftRotation(char initialOrientation, char expectedOrientation) {
-        testValidRotation(initialOrientation, expectedOrientation, 'G');
+    @Test
+    public void moveLeftRotationFromEastToNorthTest() {
+        leftRotationAssertion('E', 'N');
     }
 
-    private void testRightRotation(char initialOrientation, char expectedOrientation) {
-        testValidRotation(initialOrientation, expectedOrientation, 'D');
+    private void leftRotationAssertion(char initialOrientation, char expectedOrientation) {
+        validRotationAssertion(initialOrientation, expectedOrientation, 'G');
     }
 
-    private void testValidRotation(char initialOrientation, char expectedOrientation, char rotation) {
-        Movement movement = new Movement.Builder()
-                .build();
+    private void validRotationAssertion(char initialOrientation, char expectedOrientation, char rotation) {
+        Movement movement = new Movement.Builder().build();
 
         char orientationAfterRotation = movement.getOrientationAfterRotation(initialOrientation, rotation);
 

@@ -13,7 +13,7 @@ import java.util.List;
 public class SimulationTest {
 
     @Test
-    public void testOneMowerSimulation() {
+    public void oneMowerSimulationTest() {
         Mower mower = new Mower.Builder()
                 .coordinates(new Coordinates(1, 2))
                 .orientation('N')
@@ -41,7 +41,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void testTwoMowersSimulation() {
+    public void twoMowerSimulationTest() {
         Mower firstMower = new Mower.Builder()
                 .coordinates(new Coordinates(1, 2))
                 .orientation('N')

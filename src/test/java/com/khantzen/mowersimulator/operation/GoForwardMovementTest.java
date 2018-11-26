@@ -8,85 +8,83 @@ import org.junit.Test;
 public class GoForwardMovementTest {
 
     @Test
-    public void northOrientedMowerGoForward() {
+    public void northOrientedMowerGoForwardTest() {
         yTranslationTest('N', 2);
     }
 
     @Test
-    public void southOrientedMowerGoForward() {
+    public void southOrientedMowerGoForwardTest() {
         yTranslationTest('S', 0);
     }
 
     private void yTranslationTest(char orientation, int expectedY) {
-        simpleTranslationTest(orientation, 1, expectedY);
+        simpleTranslationAssertion(orientation, 1, expectedY);
     }
 
-
     @Test
-    public void eastOrientedMowerGoForward() {
+    public void eastOrientedMowerGoForwardTest() {
         xTranslationTest('E', 2);
     }
 
     @Test
-    public void weastOrientedMowerGoForward() {
+    public void weastOrientedMowerGoForwardTest() {
         xTranslationTest('W', 0);
     }
 
     private void xTranslationTest(char orientation, int expectedX) {
-        simpleTranslationTest(orientation, expectedX, 1);
+        simpleTranslationAssertion(orientation, expectedX, 1);
     }
 
-
     @Test
-    public void testXUnder0Translation() {
+    public void xUnder0TranslationTest() {
         Mower mower = new Mower.Builder()
                 .orientation('W')
                 .coordinates(new Coordinates(0, 1))
                 .build();
 
-        simpleTranslationTest(mower, 0, 1);
+        simpleTranslationAssertion(mower, 0, 1);
     }
 
     @Test
-    public void testYUnder0Translation() {
+    public void yUnder0TranslationTest() {
         Mower mower = new Mower.Builder()
                 .orientation('S')
                 .coordinates(new Coordinates(7, 0))
                 .build();
 
-        simpleTranslationTest(mower, 7, 0);
+        simpleTranslationAssertion(mower, 7, 0);
     }
 
     @Test
-    public void testXOverYardTranslation() {
+    public void xOverYardTranslationTest() {
         Mower mower = new Mower.Builder()
                 .orientation('E')
                 .coordinates(new Coordinates(15, 3))
                 .build();
 
-        simpleTranslationTest(mower, 15, 3);
+        simpleTranslationAssertion(mower, 15, 3);
     }
 
     @Test
-    public void testYOverYardTranslation() {
+    public void yOverYardTranslationTest() {
         Mower mower = new Mower.Builder()
                 .orientation('N')
                 .coordinates(new Coordinates(5, 18))
                 .build();
 
-        simpleTranslationTest(mower, 5, 18);
+        simpleTranslationAssertion(mower, 5, 18);
     }
 
-    private void simpleTranslationTest(char orientation, int expectedX, int expectedY) {
+    private void simpleTranslationAssertion(char orientation, int expectedX, int expectedY) {
         Mower mower = new Mower.Builder()
                 .orientation(orientation)
                 .coordinates(new Coordinates(1, 1))
                 .build();
 
-        simpleTranslationTest(mower, expectedX, expectedY);
+        simpleTranslationAssertion(mower, expectedX, expectedY);
     }
 
-    private void simpleTranslationTest(Mower mower, int expectedX, int expectedY) {
+    private void simpleTranslationAssertion(Mower mower, int expectedX, int expectedY) {
         Movement movement =
                 new Movement.Builder()
                         .yardXTopCorner(15)

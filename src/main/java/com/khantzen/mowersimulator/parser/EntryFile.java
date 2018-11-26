@@ -34,10 +34,10 @@ public class EntryFile {
     private List<String> getBrutEntriesFromPath(String path) throws IOException, ParseException {
         List<String> fileContent = this.getFileContent(path);
 
-        if (fileContent.size() % 2 == 0) {
+        if (fileContent.size() % 2 == 0 || fileContent.size() == 1) {
             throw new ParseException(
                     "Cannot parse " + path + " file. " +
-                            "incomplete file, should contain an odd line count.", 0);
+                            "incomplete file, should have an odd line count greater than 1.", 0);
         }
 
         return fileContent;

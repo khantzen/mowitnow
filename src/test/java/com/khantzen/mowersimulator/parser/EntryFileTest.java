@@ -15,18 +15,21 @@ import static org.junit.Assert.fail;
 public class EntryFileTest {
 
     @Test
-    public void validEntryFileWithOneMower() throws IOException, ParseException {
-        EntryFile entryFile = new EntryFile();
-
-        SimulatorEntry simulatorEntry = entryFile.parse("src/test/resources/validTestCase/oneMowerTestFile");
+    public void extractYardInformationTest() throws IOException, ParseException {
+        SimulatorEntry simulatorEntry = parseFile("src/test/resources/validTestCase/oneMowerTestFile");
 
         Assertions.assertThat(simulatorEntry).isNotNull();
 
-        // Check yards
         Coordinates yardRightTopCoordinates = simulatorEntry.getYardRightTopCorner();
-        this.checkYardRightTopCoordinates(yardRightTopCoordinates, 5, 15);
+        Assertions.assertThat(yardRightTopCoordinates.getX()).isEqualTo(5);
+        Assertions.assertThat(yardRightTopCoordinates.getY()).isEqualTo(15);
+    }
 
-        // Check mower
+    @Test
+    public void extractMowerInformationTest() throws IOException, ParseException {
+        SimulatorEntry simulatorEntry = parseFile("src/test/resources/validTestCase/oneMowerTestFile");
+        Assertions.assertThat(simulatorEntry).isNotNull();
+
         Assertions.assertThat(simulatorEntry.getMowerCount()).isEqualTo(1);
 
         Mower mower = simulatorEntry.getMowerAtIndex(0);
@@ -40,13 +43,8 @@ public class EntryFileTest {
     }
 
     @Test
-    public void validEntryFileWithManyMowers() throws IOException, ParseException {
-        EntryFile entryFile = new EntryFile();
-        SimulatorEntry simulatorEntry = entryFile.parse("src/test/resources/validTestCase/threeMowerTestFile");
-
-        // Check yards
-        Coordinates yardRightTopCoordinates = simulatorEntry.getYardRightTopCorner();
-        this.checkYardRightTopCoordinates(yardRightTopCoordinates, 7, 5);
+    public void extractMultipleMowerInformationTest() throws IOException, ParseException {
+        SimulatorEntry simulatorEntry = this.parseFile("src/test/resources/validTestCase/threeMowerTestFile");
 
         // Check mower
         Assertions.assertThat(simulatorEntry.getMowerCount()).isEqualTo(3);
@@ -59,13 +57,13 @@ public class EntryFileTest {
         Assertions.assertThat(mower.getInstructionSequence()).isEqualTo("ADGAAADDAA");
     }
 
-    private void checkYardRightTopCoordinates(Coordinates yardRightTopCorner, int expectedX, int expectedY) {
-        Assertions.assertThat(yardRightTopCorner.getX()).isEqualTo(expectedX);
-        Assertions.assertThat(yardRightTopCorner.getY()).isEqualTo(expectedY);
+    private SimulatorEntry parseFile(String path) throws IOException, ParseException {
+        EntryFile entryFile = new EntryFile();
+        return entryFile.parse(path);
     }
 
     @Test
-    public void unknownFilePath() {
+    public void unknownFilePathTest() {
         EntryFile entryFile = new EntryFile();
         try { // random file path so developer cannot make this test fail accidentally
             entryFile.parse("file/not/found/" + UUID.randomUUID().toString());
@@ -77,18 +75,18 @@ public class EntryFileTest {
     }
 
     @Test
-    public void invalidEntryFileIncompleteFile() throws IOException {
+    public void incompleteFileTest() throws IOException {
         EntryFile entryFile = new EntryFile();
         try {
             entryFile.parse("src/test/resources/invalidTestCase/incompleteTestFile");
             fail("Method parse is supposed to throw a ParseException");
         } catch (ParseException exception) {
-            Assertions.assertThat(exception.getMessage()).contains("incomplete file, should contain an odd line count.");
+            Assertions.assertThat(exception.getMessage()).contains("incomplete file, should have an odd line count greater than 1.");
         }
     }
 
     @Test
-    public void invalidTopRightCornerInfo() throws IOException {
+    public void invalidTopRightCornerInfoTest() throws IOException {
         EntryFile entryFile = new EntryFile();
         try {
             entryFile.parse("src/test/resources/invalidTestCase/invalidTopRightCornerTestFile");
@@ -99,7 +97,7 @@ public class EntryFileTest {
     }
 
     @Test
-    public void invalidMowerInfo() throws IOException {
+    public void invalidMowerInfoTest() throws IOException {
         EntryFile entryFile = new EntryFile();
         try {
             entryFile.parse("src/test/resources/invalidTestCase/invalidMowerInfoTestFile");
@@ -110,7 +108,7 @@ public class EntryFileTest {
     }
 
     @Test
-    public void invalidInstructionSequenceInfo() throws IOException {
+    public void invalidInstructionSequenceInfoTest() throws IOException {
         EntryFile entryFile = new EntryFile();
         try {
             entryFile.parse("src/test/resources/invalidTestCase/invalidInstructionSequenceTestFile");
@@ -119,4 +117,5 @@ public class EntryFileTest {
             Assertions.assertThat(exception.getMessage()).contains("parse 'GAGWNDEDAGAA' into valid instructions se");
         }
     }
+
 }
