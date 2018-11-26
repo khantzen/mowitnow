@@ -3,7 +3,7 @@ package com.khantzen.mowersimulator.operation;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class MowerRotationMovementTest {
+public class RotationMovementTest {
     @Test
     public void mowerRightRotationFromNorthToEast() {
         testRightRotation('N', 'E');
@@ -53,10 +53,10 @@ public class MowerRotationMovementTest {
     }
 
     private void testValidRotation(char initialOrientation, char expectedOrientation, char rotation) {
-        MowerMovement mowerMovement = new MowerMovement.Builder()
+        Movement movement = new Movement.Builder()
                 .build();
 
-        char orientationAfterRotation = mowerMovement.getOrientationAfterRotation(initialOrientation, rotation);
+        char orientationAfterRotation = movement.getOrientationAfterRotation(initialOrientation, rotation);
 
         Assertions.assertThat(orientationAfterRotation).isEqualTo(expectedOrientation);
     }

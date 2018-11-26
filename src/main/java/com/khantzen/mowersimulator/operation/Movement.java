@@ -1,28 +1,24 @@
 package com.khantzen.mowersimulator.operation;
 
 import com.khantzen.mowersimulator.model.Coordinates;
-import com.khantzen.mowersimulator.model.Mower;
 
-class MowerMovement {
+class Movement {
     private final int yardXRightTopCorner;
     private final int yardYRightTopCorner;
 
-    private MowerMovement(Builder builder) {
+    private Movement(Builder builder) {
         this.yardXRightTopCorner = builder.yardXTopCorner;
         this.yardYRightTopCorner = builder.yardYTopCorner;
     }
 
-    Coordinates getCoordinatesAfterMoveForward(Mower mower) {
-        int nextX = this.getXAfterMoveForward(mower);
-        int nextY = this.getYAfterMoveForward(mower);
+    Coordinates getCoordinatesAfterMoveForward(Coordinates coordinates, char orientation) {
+        int nextX = this.getXAfterMoveForward(coordinates.getX(), orientation);
+        int nextY = this.getYAfterMoveForward(coordinates.getY(), orientation);
 
         return new Coordinates(nextX, nextY);
     }
 
-    private int getYAfterMoveForward(Mower mower) {
-        char mowerOrientation = mower.getOrientation();
-        int y = mower.getY();
-
+    private int getYAfterMoveForward(int y, char mowerOrientation) {
         if (mowerOrientation == 'E' || mowerOrientation == 'W') {
             return y;
         }
@@ -36,10 +32,7 @@ class MowerMovement {
         return nextY;
     }
 
-    private int getXAfterMoveForward(Mower mower) {
-        char mowerOrientation = mower.getOrientation();
-        int x = mower.getX();
-
+    private int getXAfterMoveForward(int x, char mowerOrientation) {
         if (mowerOrientation == 'N' || mowerOrientation == 'S') {
             return x;
         }
@@ -78,8 +71,8 @@ class MowerMovement {
             return this;
         }
 
-        MowerMovement build() {
-            return new MowerMovement(this);
+        Movement build() {
+            return new Movement(this);
         }
     }
 }

@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Simulation {
     private final SimulatorEntry simulatorEntry;
-    private final MowerMovement mowerMovement;
+    private final Movement movement;
 
 
     public Simulation(SimulatorEntry simulatorEntry) {
         this.simulatorEntry = simulatorEntry;
-        this.mowerMovement = new MowerMovement.Builder()
+        this.movement = new Movement.Builder()
                 .yardXTopCorner(simulatorEntry.getYardXRightTopCorner())
                 .yardYTopCorner(simulatorEntry.getYardYRightTopCorner())
                 .build();
@@ -36,18 +36,22 @@ public class Simulation {
 
     private Mower moveMower(int index) {
         Mower mower = this.simulatorEntry.getMowerAtIndex(index);
+
         String instructionSequence = mower.getInstructionSequence();
 
         for (char instruction : instructionSequence.toCharArray()) {
+            char mowerOrientation = mower.getOrientation();
+
             if (instruction == 'A') {
-                Coordinates mowerCoordinates = this.mowerMovement.getCoordinatesAfterMoveForward(mower);
-                mower.setCoordinates(mowerCoordinates);
+                Coordinates mowerCoordinates = mower.getCoordinates();
+                Coordinates mowerCoordinatesAfterMoveForward = this.movement.getCoordinatesAfterMoveForward(mowerCoordinates, mowerOrientation);
+                mower.setCoordinates(mowerCoordinatesAfterMoveForward);
             } else {
-                char mowerOrientation = mower.getOrientation();
-                char newOrientation = this.mowerMovement.getOrientationAfterRotation(mowerOrientation, instruction);
+                char newOrientation = this.movement.getOrientationAfterRotation(mowerOrientation, instruction);
                 mower.setOrientation(newOrientation);
             }
         }
+
         return mower;
     }
 

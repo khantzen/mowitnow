@@ -29,6 +29,10 @@ public class Mower {
         this.coordinates = coordinates;
     }
 
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
     public int getX() {
         return this.coordinates.getX();
     }
@@ -39,7 +43,7 @@ public class Mower {
 
     @Override
     public String toString() {
-        return this.getX() + " " + this.getY() + " " + this.orientation;
+        return this.coordinates.getX() + " " + this.coordinates.getY() + " " + this.orientation;
     }
 
     public static class Builder {

@@ -5,7 +5,7 @@ import com.khantzen.mowersimulator.model.Mower;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class MowerGoForwardMovementTest {
+public class GoForwardMovementTest {
 
     @Test
     public void northOrientedMowerGoForward() {
@@ -87,13 +87,16 @@ public class MowerGoForwardMovementTest {
     }
 
     private void simpleTranslationTest(Mower mower, int expectedX, int expectedY) {
-        MowerMovement mowerMovement =
-                new MowerMovement.Builder()
+        Movement movement =
+                new Movement.Builder()
                         .yardXTopCorner(15)
                         .yardYTopCorner(18)
                         .build();
 
-        Coordinates coordAfterMoveForward = mowerMovement.getCoordinatesAfterMoveForward(mower);
+        Coordinates coord = mower.getCoordinates();
+        char mowerOrientation = mower.getOrientation();
+
+        Coordinates coordAfterMoveForward = movement.getCoordinatesAfterMoveForward(coord, mowerOrientation);
 
         Assertions.assertThat(coordAfterMoveForward.getX()).isEqualTo(expectedX);
         Assertions.assertThat(coordAfterMoveForward.getY()).isEqualTo(expectedY);
