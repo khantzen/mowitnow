@@ -21,9 +21,9 @@ public class EntryFile {
         List<String> userEntries = this.getBrutEntriesFromPath(path);
 
         String yardTopCornerInfoLine = userEntries.get(0);
-        Coordinates yardRightTopCorner = getYardRightTopCornerCoordinates(yardTopCornerInfoLine);
+        Coordinates yardRightTopCorner = this.getYardRightTopCornerCoordinates(yardTopCornerInfoLine);
 
-        List<Mower> mowerList = getMowerList(userEntries);
+        List<Mower> mowerList = this.getMowerList(userEntries);
 
         return new SimulatorEntry.Builder()
                 .yardRightTopCorner(yardRightTopCorner)
