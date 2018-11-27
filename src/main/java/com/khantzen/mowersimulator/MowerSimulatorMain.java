@@ -18,15 +18,6 @@ public class MowerSimulatorMain {
         }
     }
 
-    private static void printSimulationResult(List<String> simulationResult) {
-        simulationResult.forEach(System.out::println);
-    }
-
-    private static List<String> runMowerSimulation(SimulatorEntry simulatorEntry) {
-        Simulation simulation = new Simulation(simulatorEntry);
-        return simulation.run();
-    }
-
     private static SimulatorEntry getSimulatorEntry(String[] args) throws Exception {
         if (args.length == 0) {
             throw new Exception("Program should take at least one argument in entry");
@@ -35,5 +26,14 @@ public class MowerSimulatorMain {
         String filePath = args[0];
         EntryFile entryFile = new EntryFile();
         return entryFile.parse(filePath);
+    }
+
+    private static List<String> runMowerSimulation(SimulatorEntry simulatorEntry) {
+        Simulation simulation = new Simulation(simulatorEntry);
+        return simulation.run();
+    }
+
+    private static void printSimulationResult(List<String> simulationResult) {
+        simulationResult.forEach(System.out::println);
     }
 }
